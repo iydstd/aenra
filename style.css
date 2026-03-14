@@ -41,8 +41,8 @@ body {
 }
 
 .navbar.scrolled {
-  background: rgba(13,43,62,0.97);
-  backdrop-filter: blur(12px);
+  background: #013b46;
+  backdrop-filter: blur(15px);
 }
 
 .nav-container {
@@ -93,7 +93,7 @@ body {
 .nav-link:hover::after { width: 100%; }
 
 .navbar.scrolled {
-  background: rgba(12, 54, 80, 0.9);  /* transparan */
+  background: #013b46e0;  /* transparan */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(12px); /* Safari */
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
@@ -120,7 +120,8 @@ body {
 .mobile-menu {
   display: none;
   flex-direction: column;
-  background: var(--dark);
+  background: #013b46;
+  
   padding: 1rem 2rem;
   gap: 1rem;
   border-top: 1px solid rgba(0,200,215,0.2);
@@ -130,6 +131,7 @@ body {
 
 .mobile-link {
   color: var(--white); text-decoration: none;
+  
   font-weight: 600; font-size: 1rem;
   padding: 0.5rem 0;
   border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -181,6 +183,7 @@ body {
 }
 
 .btn-primary {
+  text-decoration: none;
   position: relative;
   z-index: 0;
   overflow: hidden;
@@ -215,7 +218,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--dark);
+  background: #013b46;
   border-radius: inherit;
   transform: scaleX(0);
   transform-origin: left;
@@ -411,7 +414,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   flex-wrap: wrap;
   min-height: 56px; /* tinggi icons selalu sama di semua card */
 }
@@ -485,8 +488,8 @@ body {
   font-size: 1.05rem;
   font-weight: 800;
   color: var(--dark);
-  margin-bottom: 0.7rem;
-  margin-top: 0.4rem;
+  margin-bottom: 0.8rem;
+  margin-top: 0.5rem;
   line-height: 1.4;
   letter-spacing: -0.3px;
 }
@@ -614,84 +617,221 @@ body {
 }
 
 /* ====== PROJECTS ====== */
-.projects { background: var(--light-bg); }
+.projects {
+  background: #013b46;
+  padding: 0;
+}
 
-.projects-grid {
+.projects-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem 6rem;
+}
+
+.projects-title {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.6rem;
+}
+
+.projects-desc {
+  text-align: center;
+  color: rgba(255,255,255,0.45);
+  font-size: 0.9rem;
+  margin-bottom: 3.5rem;
+}
+
+/* ── GRID ── */
+.projects-grid-new {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 240px 240px;
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
 }
 
-.project-card { border-radius: 20px; overflow: hidden; cursor: pointer; }
-
-.project-card.featured {
-  grid-row: 1 / 3;
-}
-
-.project-img {
-  width: 100%; height: 100%;
+/* ── ITEM ── */
+.project-item {
+  border-radius: 16px;
+  aspect-ratio: 4/3;
   position: relative;
-  transition: transform 0.4s ease;
+  overflow: hidden;
+  cursor: pointer;
+  background: #01222983;
+  border: 1px solid rgba(0,200,215,0.08);
+  transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
 }
 
-.project-card:hover .project-img { transform: scale(1.02); }
+.project-item:hover {
+  border-color: #02272e;
+  transform: translateY(-4px);
+  background: #ffffff;
+}
 
-.project-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(13,43,62,0.95) 0%, transparent 60%);
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 1.8rem;
+/* ── LOGO WRAP ── */
+.project-logo-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* ── LOGO — putih default, warna saat hover ── */
+.project-logo {
+  max-width: 75%;
+  max-height: 65%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.5;
+  transition: filter 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+}
+
+.project-item:hover .project-logo {
+  filter: grayscale(0%) brightness(1);
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* ── EMPTY / COMING SOON ── */
+.project-empty {
+  cursor: default;
+}
+
+.project-empty:hover {
+  transform: none;
+  border-color: rgba(0,200,215,0.08);
+  background: #0f3a46;
+}
+
+.coming-soon-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.15);
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+/* ── MODAL ── */
+.project-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.3s ease;
 }
 
-.project-card:hover .project-overlay { opacity: 1; }
-
-.project-tag {
-  display: inline-block;
-  background: var(--cyan);
-  color: var(--white);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 0.25rem 0.8rem;
-  border-radius: 50px;
-  margin-bottom: 0.6rem;
-  width: fit-content;
+.project-modal.open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.project-overlay h3 {
-  color: var(--white);
-  font-size: 1.2rem;
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 46, 56, 0.75);
+  backdrop-filter: blur(6px);
+}
+
+.modal-box {
+  position: relative;
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2.5rem 2rem 2rem;
+  width: 90%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+  transform: scale(0.92) translateY(16px);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1;
+}
+
+.project-modal.open .modal-box {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  background: var(--light-bg);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--dark);
+  transition: background 0.2s ease;
+}
+
+.modal-close:hover {
+  background: rgba(0,200,215,0.15);
+  color: var(--cyan);
+}
+
+.modal-logo-wrap {
+  width: 120px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+}
+
+.modal-logo-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.modal-category {
+  display: block;
+  font-size: 0.68rem;
   font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
   margin-bottom: 0.4rem;
 }
 
-.project-overlay p {
-  color: rgba(255,255,255,0.7);
-  font-size: 0.85rem;
-  margin-bottom: 1rem;
+.modal-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 1.4rem;
+  letter-spacing: -0.3px;
 }
 
-.btn-outline {
-  background: transparent;
-  border: 1.5px solid var(--cyan);
-  color: var(--cyan);
-  padding: 0.5rem 1.4rem;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  width: fit-content;
+.modal-btn {
+  margin: 0 auto;
+  padding: 0.6rem 1.4rem;
+  font-size: 0.82rem;
 }
 
-.btn-outline:hover {
-  background: var(--cyan);
-  color: var(--white);
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .projects-grid-new { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .projects-grid-new { grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+  .projects-inner    { padding: 3.5rem 1.2rem 4rem; }
+}
+
+@media (max-width: 380px) {
+  .projects-grid-new { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
 }
 
 /* ====== CONTACT ====== */
@@ -768,7 +908,7 @@ body {
 
 /* ====== FOOTER ====== */
 .footer {
-  background: var(--dark);
+  background: #013b46;
   color: var(--white);
   padding: 3.5rem 2rem 0;
 }
@@ -988,4 +1128,39 @@ body {
   /* Footer */
   .footer-links         { grid-template-columns: 1fr; gap: 1.2rem; }
   .footer-bottom p      { font-size: 0.75rem; }
+}
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1.5rem 2rem;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(3, 1fr); /* tetap 3 kolom tapi lebih kecil */
+    gap: 1rem;
+  }
+
+  .footer-col h4 { font-size: 0.72rem; }
+  .footer-col a  { font-size: 0.82rem; }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2.5rem 1.2rem 0;
+  }
+
+  .footer-container {
+    padding: 0 0 2rem;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr); /* 2 kolom di HP kecil */
+    gap: 1.5rem;
+  }
+
+  .footer-left p {
+    max-width: 100%;
+    font-size: 0.85rem;
+  }
 }
