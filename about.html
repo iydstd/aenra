@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="img/AENRA LOGO1.png"> 
+  <title>About Us – Aenra Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ============================================
+       ABOUT PAGE — Additional Styles
+       ============================================ */
+
+    /* ── HERO ABOUT ── */
+    .about-hero {
+      min-height: 100vh;
+      background: #013b46;
+      display: flex;
+      align-items: center;
+      padding-top: 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,200,215,0.12) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      pointer-events: none;
+    }
+
+    .about-hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,200,215,0.07) 0%, transparent 70%);
+      bottom: -50px; left: -80px;
+      pointer-events: none;
+    }
+
+    .about-hero-inner {
+        max-width: 1100px; /* sama dengan section lain */
+        margin: 0 auto;
+        padding: 4rem 2rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .about-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px; height: 2px;
+      background: var(--cyan);
+    }
+
+    .about-hero-title {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin-bottom: 1.8rem;
+    }
+
+    .about-hero-title span { color: var(--cyan); }
+
+    .about-hero-desc {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.8;
+      max-width: 800px;
+      margin-bottom: 3rem;
+    }
+
+    .about-hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── btn-primary: konsisten dengan index.html ── */
+    .btn-primary {
+      position: relative;
+      z-index: 0;
+      overflow: hidden;
+      background: transparent;
+      border: 2px solid transparent;
+      color: var(--white);
+      padding: 0.9rem 2.4rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: 0.2px;
+      text-decoration: none;
+      display: inline-block;
+      transition: color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--cyan), #00e5f5, #0092d6, var(--cyan));
+      background-size: 200% 100%;
+      animation: gradientMove 1s linear infinite;
+      z-index: -2;
+      border-radius: inherit;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #013b46;
+      border-radius: inherit;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+      z-index: -1;
+    }
+    .btn-primary:hover::before { transform: scaleX(1); }
+    .btn-primary:hover {
+      color: var(--cyan);
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0,200,215,0.3);
+    }
+    @keyframes gradientMove {
+      0%   { background-position: 0% 0%; }
+      100% { background-position: -200% 0%; }
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      color: var(--white);
+      padding: 0.85rem 1.8rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.3s ease, background 0.3s ease;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .btn-ghost:hover {
+      border-color: var(--cyan);
+      background: rgba(0,200,215,0.08);
+    }
+
+
+
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* ── STORY SECTION ── */
+    .about-story {
+      background: var(--light-bg);
+      padding: 5rem 2rem;
+    }
+
+    .about-story-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .story-left { position: relative; }
+
+    /* ── unused cleanup ── */
+
+    .story-visual {
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+    }
+
+    .story-blob {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #013b46 0%, #00C8D7 100%);
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      animation: morphBlob 8s ease-in-out infinite;
+    }
+
+    .story-blob-inner {
+      position: absolute;
+      inset: 15%;
+      background: var(--light-bg);
+      border-radius: 30% 70% 60% 40% / 40% 30% 70% 60%;
+      animation: morphBlob 6s ease-in-out infinite reverse;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .story-year {
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--cyan);
+      letter-spacing: -3px;
+      opacity: 0.4;
+    }
+
+    @keyframes morphBlob {
+      0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+      25%  { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+      50%  { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+      75%  { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+    }
+
+    .story-right p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 1.4rem;
+    }
+
+    .story-right p:first-of-type {
+      font-size: 1.15rem;
+      color: var(--dark);
+      font-weight: 600;
+      line-height: 1.65;
+    }
+
+    /* ── VISION MISSION ── */
+    .about-vision {
+      background: #013b46;
+      padding: 5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-vision::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,200,215,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .about-vision-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .vision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .vision-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,200,215,0.15);
+      border-radius: 20px;
+      padding: 2.5rem;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .vision-card:hover {
+      border-color: rgba(0,200,215,0.4);
+      background: rgba(0,200,215,0.05);
+    }
+
+    .vision-card-icon {
+      width: 48px; height: 48px;
+      background: rgba(0,200,215,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.4rem;
+    }
+
+    .vision-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+      letter-spacing: -0.3px;
+    }
+
+    .vision-card p {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+    }
+
+    .mission-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .mission-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+    }
+
+    .mission-list li::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    /* ── WHY US ── */
+    .about-why {
+      background: var(--light-bg);
+      padding: 5rem 2rem;
+    }
+
+    .about-why-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .why-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2.2rem;
+      border: 1px solid transparent;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--cyan);
+      border-radius: 0 0 3px 3px;
+      transition: height 0.4s ease;
+    }
+
+    .why-card:hover::before { height: 100%; }
+
+    .why-card:hover {
+      border-color: rgba(0,200,215,0.15);
+      box-shadow: 0 12px 40px rgba(0,200,215,0.1);
+      transform: translateY(-4px);
+    }
+
+    .why-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: rgba(0,200,215,0.12);
+      line-height: 1;
+      margin-bottom: 1rem;
+      letter-spacing: -2px;
+    }
+
+    .why-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.3px;
+    }
+
+    .why-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── NUMBERS ── */
+ .about-numbers {
+  background: #00BCD4; /* atau warna cyan yang dipakai */
+  padding: 48px 40px; /* kurangi padding agar tidak terlalu besar */
+}
+
+
+.about-numbers-inner {
+  display: flex;
+  flex-direction: row;        /* semua sejajar horizontal */
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  max-width: 800px;           /* batasi lebar agar tidak terlalu melebar */
+  margin: 0 auto;
+  flex-wrap: nowrap;          /* jangan wrap ke baris baru */
+}
+
+.number-item {
+  flex: 1;
+  text-align: center;
+  padding: 16px 24px;
+}
+
+
+.number-value {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #0d2137; /* warna gelap seperti di screenshot */
+  line-height: 1;
+}
+.number-label {
+  font-size: 0.85rem;
+  color: #0d2137;
+  margin-top: 6px;
+  font-weight: 500;
+}
+ .number-divider {
+  width: 1px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+    /* ── TEAM ── */
+    .about-team {
+      background: var(--white);
+      padding: 5rem 2rem;
+    }
+
+    .about-team-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .team-intro {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 560px;
+      margin: 1rem auto 3.5rem;
+      text-align: center;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .team-card {
+      background: var(--light-bg);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,200,215,0.1);
+    }
+
+    .team-avatar {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, #013b46, var(--cyan));
+      border-radius: 50%;
+      margin: 0 auto 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .team-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .team-role {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--cyan);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .team-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── VALUES ── */
+    .about-values {
+      background: var(--light-bg);
+      padding: 5rem 2rem;
+    }
+
+    .about-values-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-top: 3.5rem;
+    }
+
+    .value-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .value-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,200,215,0.1);
+    }
+
+    .value-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .value-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.2px;
+    }
+
+    .value-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── CTA ── */
+    .about-cta {
+      background: #013b46;
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-cta::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      background: #013b46;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .about-cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-cta h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-cta h2 span { color: var(--cyan); }
+
+    .about-cta p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── SECTION LABEL REUSE ── */
+    .about-section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.8rem;
+    }
+
+    .about-section-label::before {
+      content: '';
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--cyan);
+    }
+
+    .about-section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -1px;
+      line-height: 1.2;
+    }
+
+    .about-section-title.light { color: var(--white); }
+
+/* ============================================
+       RESPONSIVE
+       ============================================ */
+
+    /* ── TABLET (≤900px) ── */
+    @media (max-width: 900px) {
+      .about-story-inner   { grid-template-columns: 1fr; gap: 3rem; }
+      .story-visual        { max-width: 260px; padding-bottom: 260px; margin: 0 auto; }
+      .vision-grid         { grid-template-columns: 1fr; gap: 1.5rem; }
+      .why-grid            { grid-template-columns: 1fr; }
+      .team-grid           { grid-template-columns: repeat(2, 1fr); }
+      .values-grid         { grid-template-columns: repeat(2, 1fr); }
+      .about-numbers-inner { max-width: 600px; }
+      .number-divider      { display: none; }
+    }
+
+    /* ── MOBILE (≤768px) ── */
+    @media (max-width: 768px) {
+
+      /* Hero */
+      .about-hero {
+        padding-top: 64px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .about-hero-inner {
+        width: 100%;
+        max-width: 420px;
+        padding: 3rem 1.5rem 4rem;
+        text-align: left;
+        box-sizing: border-box;
+        margin: 0 auto;
+      }
+      .about-hero-title {
+        font-size: clamp(1.6rem, 6vw, 2.2rem);
+        letter-spacing: -0.8px;
+        margin-bottom: 1.2rem;
+        word-break: keep-all;
+      }
+      .about-hero-desc {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        max-width: 100%;
+      }
+      .about-eyebrow  { font-size: 0.68rem; margin-bottom: 1rem; }
+      .about-hero-cta { gap: 0.8rem; justify-content: flex-start; }
+
+      /* Section padding — konsisten dengan hero */
+      .about-story   { padding: 4rem 1.5rem; }
+      .about-vision  { padding: 4rem 1.5rem; }
+      .about-why     { padding: 4rem 1.5rem; }
+      .about-team    { padding: 4rem 1.5rem; }
+      .about-values  { padding: 4rem 1.5rem; }
+      .about-cta     { padding: 4rem 1.5rem; }
+      .about-numbers { padding: 3rem 1.5rem; }
+
+      /* Section inner — max-width sama dengan hero */
+      .about-story-inner,
+      .about-vision-inner,
+      .about-why-inner,
+      .about-team-inner,
+      .about-values-inner,
+      .about-cta-inner {
+        max-width: 420px;
+        margin: 0 auto;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* Story */
+      .about-story-inner   { grid-template-columns: 1fr; gap: 2.5rem; }
+      .story-visual        { max-width: 220px; padding-bottom: 220px; margin: 0 auto; }
+      .story-right p       { font-size: 0.92rem; }
+      .story-right p:first-of-type { font-size: 1rem; }
+
+      /* Vision */
+      .vision-grid   { grid-template-columns: 1fr; gap: 1.2rem; margin-top: 2.5rem; }
+      .vision-card   { padding: 1.8rem; }
+
+      /* Why */
+      .why-grid      { grid-template-columns: 1fr; gap: 1rem; margin-top: 2.5rem; }
+      .why-card      { padding: 1.6rem; }
+      .why-number    { font-size: 2rem; }
+
+      /* Numbers */
+      .about-numbers-inner {
+        flex-direction: column;
+        gap: 1.5rem;
+        max-width: 420px;
+      }
+      .number-divider { width: 48px; height: 1px; display: block; }
+      .number-value   { font-size: 2.2rem; }
+      .number-item    { padding: 0; }
+
+      /* Team */
+      .team-grid  { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .team-intro { font-size: 0.92rem; margin-bottom: 2.5rem; }
+
+      /* Values */
+      .values-grid { grid-template-columns: repeat(2, 1fr); gap: 0.9rem; margin-top: 2.5rem; }
+      .value-card  { padding: 1.4rem 1.2rem; }
+      .value-icon  { font-size: 1.6rem; margin-bottom: 0.7rem; }
+
+      /* Section titles */
+      .about-section-title { font-size: clamp(1.4rem, 5vw, 1.9rem); }
+      .about-section-label { font-size: 0.68rem; }
+
+      /* CTA */
+      .about-cta h2 { font-size: clamp(1.5rem, 5vw, 2rem); letter-spacing: -1px; }
+      .about-cta p  { font-size: 0.92rem; }
+      .cta-buttons  { flex-direction: column; align-items: flex-start; }
+      .cta-buttons .btn-primary,
+      .cta-buttons .btn-ghost {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+    /* ── SMALL PHONE (≤480px) ── */
+    @media (max-width: 480px) {
+
+      /* Hero */
+      .about-hero-inner {
+        max-width: 100%;
+        padding: 2.5rem 1.2rem 3.5rem;
+      }
+      .about-hero-title { font-size: clamp(1.4rem, 7vw, 1.9rem); }
+      .about-hero-desc  { font-size: 0.88rem; }
+
+      /* Section padding */
+      .about-story   { padding: 3rem 1.2rem; }
+      .about-vision  { padding: 3rem 1.2rem; }
+      .about-why     { padding: 3rem 1.2rem; }
+      .about-team    { padding: 3rem 1.2rem; }
+      .about-values  { padding: 3rem 1.2rem; }
+      .about-cta     { padding: 3rem 1.2rem; }
+      .about-numbers { padding: 2.5rem 1.2rem; }
+
+      /* Section inner full width */
+      .about-story-inner,
+      .about-vision-inner,
+      .about-why-inner,
+      .about-team-inner,
+      .about-values-inner,
+      .about-cta-inner {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      /* Numbers */
+      .about-numbers-inner { max-width: 100%; }
+      .number-value        { font-size: 2rem; }
+      .number-label        { font-size: 0.78rem; }
+
+      /* Story */
+      .story-visual { max-width: 180px; padding-bottom: 180px; }
+      .story-year   { font-size: 2.5rem; }
+
+      /* Values */
+      .values-grid { grid-template-columns: 1fr; }
+      .value-card  { padding: 1.2rem; }
+
+      /* Vision */
+      .vision-card   { padding: 1.4rem; }
+      .vision-card h3 { font-size: 1rem; }
+
+      /* Why */
+      .why-card   { padding: 1.4rem; }
+      .why-card h3 { font-size: 0.95rem; }
+      .why-card p  { font-size: 0.85rem; }
+
+      /* Team */
+      .team-grid   { max-width: 100%; }
+      .team-card   { padding: 1.5rem; }
+      .team-avatar { width: 64px; height: 64px; font-size: 1.4rem; }
+
+      /* Section title */
+      .about-section-title { font-size: 1.3rem; }
+    }
+  </style>
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR (sama persis dengan index.html) -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+       <a href="index.html">
+       <img src="img/AENRA LOGO.png" id="logo" style="width: 110px; height: 40px; object-fit: contain;">
+       </a>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html#service" class="nav-link">Service</a>
+        <a href="index.html#project" class="nav-link">Project</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html#service" class="mobile-link">Service</a>
+      <a href="index.html#project" class="mobile-link">Project</a>
+      <a href="index.html#contact" class="mobile-link">Contact</a>
+    </div>
+  </header>
+
+  <!-- ① HERO -->
+  <section class="about-hero">
+    <div class="about-hero-inner">
+      <div class="about-eyebrow" data-animate="fadeUp">About Us</div>
+      <h1 class="about-hero-title" data-animate="fadeUp" style="animation-delay:0.1s">
+        Building Digital Presence<br/>
+        for <span>Modern Businesses</span>
+      </h1>
+      <p class="about-hero-desc" data-animate="fadeUp" style="animation-delay:0.2s">
+        AENRA adalah studio digital yang membantu bisnis membangun kehadiran online yang kuat melalui sistem website, branding, dan pengalaman digital yang terintegrasi.
+      </p>
+      <div class="about-hero-cta" data-animate="fadeUp" style="animation-delay:0.3s">
+        <a href="index.html#project" class="btn-ghost">
+          Lihat Project Kami
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-hint-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ② OUR STORY -->
+  <section class="about-story">
+    <div class="about-story-inner">
+      <div class="story-left" data-animate="fadeLeft">
+        <div class="story-visual">
+          <div class="story-blob"></div>
+          <div class="story-blob-inner">
+            <span class="story-year">EST.</span>
+          </div>
+        </div>
+      </div>
+      <div class="story-right" data-animate="fadeRight">
+        <div class="about-section-label">Our Story</div>
+        <h2 class="about-section-title" style="margin-bottom:1.8rem">
+          AENRA lahir dari sebuah<br/>pengamatan sederhana
+        </h2>
+        <p>Banyak bisnis memiliki produk yang bagus, tetapi kehadiran digitalnya belum mencerminkan kualitas tersebut.</p>
+        <p>Informasi bisnis tersebar di berbagai platform, identitas brand tidak konsisten, dan pelanggan sering kesulitan memahami apa yang sebenarnya ditawarkan.</p>
+        <p>Kami melihat bahwa masalah ini bukan sekadar soal desain atau teknologi, melainkan tentang bagaimana sebuah bisnis membangun digital presence yang terstruktur dan profesional.</p>
+        <p>Berangkat dari situ, <strong style="color:var(--dark)">AENRA hadir</strong> untuk membantu bisnis menghubungkan identitas brand, website, dan sistem digital menjadi satu kesatuan yang jelas dan efektif.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ VISION & MISSION -->
+  <section class="about-vision">
+    <div class="about-vision-inner">
+      <div class="section-header" data-animate="fadeUp">
+        <div class="about-section-label" style="justify-content:center">Vision & Mission</div>
+        <h2 class="about-section-title light">Apa yang kami perjuangkan</h2>
+      </div>
+      <div class="vision-grid">
+        <div class="vision-card" data-animate="fadeUp" style="animation-delay:0.1s">
+          <div class="vision-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="3" stroke="#00C8D7" stroke-width="1.8"/>
+              <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Vision</h3>
+          <p>Menjadi studio digital yang membantu bisnis berkembang melalui digital presence yang kuat, jelas, dan berkelanjutan.</p>
+        </div>
+        <div class="vision-card" data-animate="fadeUp" style="animation-delay:0.2s">
+          <div class="vision-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 11l3 3L22 4" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="#00C8D7" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Mission</h3>
+          <ul class="mission-list">
+            <li>Membantu bisnis membangun identitas digital yang profesional</li>
+            <li>Mengembangkan website yang tidak hanya menarik, tetapi juga strategis</li>
+            <li>Menghubungkan berbagai platform digital menjadi sistem yang terintegrasi</li>
+            <li>Memberikan solusi digital yang relevan bagi bisnis modern</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ WHY CHOOSE AENRA -->
+  <section class="about-why">
+    <div class="about-why-inner">
+      <div class="section-header" data-animate="fadeUp">
+        <div class="about-section-label">Why Us</div>
+        <h2 class="about-section-title">Mengapa memilih AENRA</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card" data-animate="fadeUp" style="animation-delay:0.1s">
+          <div class="why-number">01</div>
+          <h3>Strategic Approach</h3>
+          <p>Kami tidak hanya membuat website atau desain visual. Kami merancang sistem digital yang membantu bisnis tampil lebih profesional dan mudah dipahami pelanggan.</p>
+        </div>
+        <div class="why-card" data-animate="fadeUp" style="animation-delay:0.2s">
+          <div class="why-number">02</div>
+          <h3>Business-Oriented Design</h3>
+          <p>Setiap keputusan desain dibuat dengan mempertimbangkan tujuan bisnis, bukan sekadar estetika semata.</p>
+        </div>
+        <div class="why-card" data-animate="fadeUp" style="animation-delay:0.3s">
+          <div class="why-number">03</div>
+          <h3>Integrated Digital System</h3>
+          <p>Kami membantu menghubungkan brand, website, dan platform digital sehingga bisnis memiliki kehadiran online yang lebih terstruktur.</p>
+        </div>
+        <div class="why-card" data-animate="fadeUp" style="animation-delay:0.4s">
+          <div class="why-number">04</div>
+          <h3>Clear Communication</h3>
+          <p>Kami percaya bahwa komunikasi yang jelas dan transparan adalah kunci keberhasilan setiap project yang kami kerjakan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ NUMBERS -->
+  <section class="about-numbers" data-animate="fadeUp">
+    <div class="about-numbers-inner">
+      <div class="number-item">
+        <div class="number-value" id="countProjects">0+</div>
+        <div class="number-label">Projects Completed</div>
+      </div>
+      <div class="number-divider"></div>
+      <div class="number-item">
+        <div class="number-value" id="countClients">0+</div>
+        <div class="number-label">Businesses Helped</div>
+      </div>
+      <div class="number-divider"></div>
+      <div class="number-item">
+        <div class="number-value" id="countYears">0+</div>
+        <div class="number-label">Years of Experience</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥ TEAM -->
+  <section class="about-team">
+    <div class="about-team-inner">
+      <div class="section-header" data-animate="fadeUp">
+        <div class="about-section-label" style="justify-content:center">Our Team</div>
+        <h2 class="about-section-title" style="text-align:center">Tim di balik AENRA</h2>
+        <p class="team-intro">AENRA dibangun oleh tim yang memiliki minat besar pada desain, teknologi, dan strategi digital. Setiap project dikerjakan dengan pendekatan kolaboratif.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card" data-animate="fadeUp" style="animation-delay:0.1s">
+          <div class="team-avatar">A</div>
+          <h4>Nama Anggota</h4>
+          <div class="team-role">Founder & Creative Director</div>
+          <p>Bertanggung jawab atas arah kreatif dan strategi digital setiap project.</p>
+        </div>
+        <div class="team-card" data-animate="fadeUp" style="animation-delay:0.2s">
+          <div class="team-avatar">B</div>
+          <h4>Nama Anggota</h4>
+          <div class="team-role">Web Developer</div>
+          <p>Membangun website yang cepat, responsif, dan dioptimalkan untuk performa terbaik.</p>
+        </div>
+        <div class="team-card" data-animate="fadeUp" style="animation-delay:0.3s">
+          <div class="team-avatar">C</div>
+          <h4>Nama Anggota</h4>
+          <div class="team-role">Brand Designer</div>
+          <p>Menciptakan identitas visual yang kuat dan konsisten untuk setiap klien.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑦ VALUES -->
+  <section class="about-values">
+    <div class="about-values-inner">
+      <div class="section-header" data-animate="fadeUp">
+        <div class="about-section-label" style="justify-content:center">Our Values</div>
+        <h2 class="about-section-title" style="text-align:center">Nilai yang kami pegang</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card" data-animate="fadeUp" style="animation-delay:0.1s">
+          <div class="value-icon">🔍</div>
+          <h3>Clarity</h3>
+          <p>Komunikasi dan informasi yang jelas adalah fondasi digital presence yang baik.</p>
+        </div>
+        <div class="value-card" data-animate="fadeUp" style="animation-delay:0.2s">
+          <div class="value-icon">🔗</div>
+          <h3>Consistency</h3>
+          <p>Brand yang kuat dibangun melalui konsistensi visual dan pesan di setiap platform.</p>
+        </div>
+        <div class="value-card" data-animate="fadeUp" style="animation-delay:0.3s">
+          <div class="value-icon">⭐</div>
+          <h3>Quality</h3>
+          <p>Setiap project dikerjakan dengan perhatian penuh pada detail dan kualitas hasil.</p>
+        </div>
+        <div class="value-card" data-animate="fadeUp" style="animation-delay:0.4s">
+          <div class="value-icon">📈</div>
+          <h3>Growth</h3>
+          <p>Solusi yang kami bangun mendukung perkembangan bisnis hari ini dan di masa depan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑧ CTA -->
+  <section class="about-cta">
+    <div class="about-cta-inner" data-animate="fadeUp">
+      <h2>Ready to Build Your<br/><span>Digital Presence?</span></h2>
+      <p>Jika bisnis Anda ingin memiliki website profesional dan sistem digital yang lebih terstruktur, kami siap membantu.</p>
+      <div class="cta-buttons">
+        <a href="index.html#contact" class="btn-primary">Start Your Project</a>
+        <a href="index.html#contact" class="btn-ghost">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="logo">
+      <img src="img/AENRA LOGO.png" id="logo" style="width: 110px; height: 40px; object-fit: contain;">
+      </div>
+        <p>Solusi digital terpercaya untuk bisnis modern Anda.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="about.html">About Us</a>
+          <a href="#">Our Team</a>
+          <a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="index.html#service">Web Dev</a>
+          <a href="index.html#service">Branding</a>
+          <a href="index.html#service">Marketing</a>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Aenra. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Scroll animations
+    const animEls = document.querySelectorAll('[data-animate]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    animEls.forEach(el => observer.observe(el));
+
+    // Counter animation untuk numbers
+    function animateCount(el, target, suffix = '+') {
+      let current = 0;
+      const step = Math.ceil(target / 40);
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        el.textContent = current + suffix;
+      }, 40);
+    }
+
+    const numbersSection = document.querySelector('.about-numbers');
+    const numbersObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        animateCount(document.getElementById('countProjects'), 10);
+        animateCount(document.getElementById('countClients'), 8);
+        animateCount(document.getElementById('countYears'), 2);
+        numbersObserver.disconnect();
+      }
+    }, { threshold: 0.5 });
+    numbersObserver.observe(numbersSection);
+  </script>
+</body>
+</html>
