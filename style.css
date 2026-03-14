@@ -934,7 +934,10 @@ body {
 .footer-links {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 4rem;
+  display: flex;
+  justify-content: flex-end; /* mepet kanan */
+  align-items: flex-start;
 }
 
 .footer-col h4 {
@@ -1128,6 +1131,12 @@ body {
   /* Footer */
   .footer-links         { grid-template-columns: 1fr; gap: 1.2rem; }
   .footer-bottom p      { font-size: 0.75rem; }
+}
+@media (max-width: 768px) {
+  .footer-links {
+    justify-content: flex-start; /* mepet kiri di mobile */
+    gap: 2.5rem;
+  }
 }
 @media (max-width: 768px) {
   .footer-container {
