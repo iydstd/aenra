@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Blog Aenra – Tips digital presence, studi kasus branding, dan tren digital untuk bisnis modern."/>
+  <link rel="icon" type="image/png" href="img/AENRA LOGO1.png">
+  <title>Blog – Aenra Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ============================================
+       BLOG PAGE — Styles
+       ============================================ */
+
+    /* ── HERO ── */
+    .blog-hero {
+      background: #013b46;
+      padding-top: 72px;
+      padding-bottom: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blog-hero::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,200,215,0.1) 0%, transparent 65%);
+      top: -80px; right: -80px;
+      pointer-events: none;
+    }
+
+    .blog-hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .blog-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1.2rem;
+    }
+
+    .blog-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--cyan);
+    }
+
+    .blog-hero-title {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .blog-hero-title span { color: var(--cyan); }
+
+    .blog-hero-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FILTER TABS ── */
+    .blog-filters {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.6);
+      padding: 0.45rem 1.1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: 0.3px;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: var(--dark);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .blog-main {
+      background: var(--light-bg);
+      padding: 4rem 2rem 6rem;
+    }
+
+    .blog-main-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── FEATURED POST ── */
+    .blog-featured {
+      margin-bottom: 3rem;
+    }
+
+    .featured-card {
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .featured-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,200,215,0.12);
+    }
+
+    .featured-visual {
+      background: linear-gradient(135deg, #013b46 0%, #00C8D7 100%);
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .featured-visual-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 30% 50%, rgba(255,255,255,0.05) 1px, transparent 1px),
+        radial-gradient(circle at 70% 20%, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .featured-visual-icon {
+      width: 80px; height: 80px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      background: var(--cyan);
+      color: var(--dark);
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      z-index: 2;
+    }
+
+    .featured-content {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .post-category {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+
+    .post-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .post-dot {
+      width: 3px; height: 3px;
+      background: var(--text-muted);
+      border-radius: 50%;
+    }
+
+    .featured-content h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.3;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.8rem;
+    }
+
+    .featured-content p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .post-read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--cyan);
+      text-decoration: none;
+      transition: gap 0.3s ease;
+    }
+
+    .post-read-link:hover { gap: 10px; }
+
+    .post-read-link svg {
+      transition: transform 0.3s ease;
+    }
+
+    .post-read-link:hover svg {
+      transform: translateX(3px);
+    }
+
+    .post-read-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--light-bg);
+    }
+
+    /* ── SECTION LABEL ── */
+    .blog-section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .blog-section-label::before {
+      content: '';
+      display: block;
+      width: 20px; height: 2px;
+      background: var(--cyan);
+    }
+
+    /* ── POSTS GRID ── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .blog-card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(0,200,215,0.12);
+    }
+
+    .blog-card-visual {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blog-card-visual-inner {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .blog-card-visual-inner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .blog-card-icon {
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .card-cat-badge {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(8px);
+      color: var(--white);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: 50px;
+      z-index: 2;
+    }
+
+    .blog-card-body {
+      padding: 1.4rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card-body .post-meta {
+      margin-bottom: 0.7rem;
+    }
+
+    .blog-card-body h3 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.4;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.6rem;
+    }
+
+    .blog-card-body p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .blog-card-footer {
+      padding: 0 1.4rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .read-time {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ── NEWSLETTER ── */
+    .blog-newsletter {
+      background: #013b46;
+      border-radius: 24px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 4rem;
+      margin-bottom: 4rem;
+    }
+
+    .blog-newsletter::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,200,215,0.1) 0%, transparent 65%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .blog-newsletter-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .blog-newsletter h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      margin-bottom: 0.6rem;
+    }
+
+    .blog-newsletter h3 span { color: var(--cyan); }
+
+    .blog-newsletter p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      color: var(--white);
+      outline: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    .newsletter-input::placeholder { color: rgba(255,255,255,0.3); }
+    .newsletter-input:focus { border-color: var(--cyan); }
+
+    .newsletter-btn {
+      background: var(--cyan);
+      color: var(--dark);
+      border: none;
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .newsletter-btn:hover {
+      background: #00e5f5;
+      transform: translateY(-1px);
+    }
+
+    /* ── SIDEBAR TIPS ── */
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .blog-sidebar {
+      position: sticky;
+      top: 90px;
+    }
+
+    .sidebar-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    .sidebar-card h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 2px solid var(--light-bg);
+    }
+
+    .sidebar-topic {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--light-bg);
+      cursor: pointer;
+      transition: gap 0.2s ease;
+      text-decoration: none;
+    }
+
+    .sidebar-topic:last-child { border-bottom: none; }
+
+    .sidebar-topic:hover { gap: 14px; }
+
+    .sidebar-topic-dot {
+      width: 6px; height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .sidebar-topic span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .sidebar-topic:hover span { color: var(--dark); }
+
+    .sidebar-cta {
+      background: linear-gradient(135deg, #013b46, #025566);
+      border-radius: 18px;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .sidebar-cta h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-cta p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .sidebar-cta-btn {
+      display: block;
+      background: var(--cyan);
+      color: var(--dark);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .sidebar-cta-btn:hover { background: #00e5f5; }
+
+    /* ── LOAD MORE ── */
+    .blog-load-more {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
+    .load-more-btn {
+      background: transparent;
+      border: 1.5px solid rgba(0,200,215,0.3);
+      color: var(--cyan);
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .load-more-btn:hover {
+      background: var(--cyan);
+      color: var(--dark);
+      border-color: var(--cyan);
+    }
+
+    /* ── POST COLORS ── */
+    .color-1 { background: linear-gradient(135deg, #013b46 0%, #025e6e 100%); }
+    .color-2 { background: linear-gradient(135deg, #0a2e38 0%, #00C8D7 100%); }
+    .color-3 { background: linear-gradient(135deg, #164863 0%, #427D9D 100%); }
+    .color-4 { background: linear-gradient(135deg, #013b46 0%, #0a6b50 100%); }
+    .color-5 { background: linear-gradient(135deg, #1a1a2e 0%, #013b46 100%); }
+    .color-6 { background: linear-gradient(135deg, #2d1b4e 0%, #013b46 100%); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .blog-layout        { grid-template-columns: 1fr; }
+      .blog-sidebar       { position: static; }
+      .blog-grid          { grid-template-columns: repeat(2, 1fr); }
+      .featured-card      { grid-template-columns: 1fr; }
+      .featured-visual    { min-height: 200px; }
+    }
+
+    @media (max-width: 600px) {
+      .blog-hero-inner    { padding: 3rem 1.2rem 4rem; }
+      .blog-main          { padding: 3rem 1.2rem 4rem; }
+      .blog-grid          { grid-template-columns: 1fr; gap: 1rem; }
+      .blog-newsletter    { padding: 2rem 1.2rem; }
+      .newsletter-form    { flex-direction: column; }
+      .blog-hero-title    { font-size: clamp(1.7rem, 7vw, 2.4rem); letter-spacing: -1px; }
+      .featured-content   { padding: 1.5rem; }
+      .featured-content h2 { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="img/AENRA LOGO.png" id="logo" style="width:110px;height:40px;object-fit:contain;">
+        </a>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html#service" class="nav-link">Service</a>
+        <a href="index.html#project" class="nav-link">Project</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html#service" class="mobile-link">Service</a>
+      <a href="index.html#project" class="mobile-link">Project</a>
+      <a href="index.html#contact" class="mobile-link">Contact</a>
+      <a href="blog.html" class="mobile-link">Blog</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="blog-hero">
+    <div class="blog-hero-inner">
+      <div class="blog-eyebrow" data-animate="fadeUp">Aenra Blog</div>
+      <h1 class="blog-hero-title" data-animate="fadeUp" style="animation-delay:0.1s">
+        Insight Digital untuk<br/><span>Bisnis Modern</span>
+      </h1>
+      <p class="blog-hero-desc" data-animate="fadeUp" style="animation-delay:0.2s">
+        Tips digital presence, studi kasus branding, dan tren digital yang relevan untuk bisnis Anda.
+      </p>
+      <div class="blog-filters" data-animate="fadeUp" style="animation-delay:0.3s">
+        <button class="filter-btn active" data-filter="all">Semua</button>
+        <button class="filter-btn" data-filter="digital-presence">Digital Presence</button>
+        <button class="filter-btn" data-filter="branding">Branding</button>
+        <button class="filter-btn" data-filter="website">Website</button>
+        <button class="filter-btn" data-filter="studi-kasus">Studi Kasus</button>
+        <button class="filter-btn" data-filter="tips">Tips & Trik</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="blog-main">
+    <div class="blog-main-inner">
+
+      <!-- FEATURED POST -->
+      <div class="blog-featured" data-animate="fadeUp">
+        <div class="blog-section-label">Featured Post</div>
+        <div class="featured-card">
+          <div class="featured-visual color-1">
+            <div class="featured-visual-pattern"></div>
+            <div class="featured-visual-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#00C8D7" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#00C8D7" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="featured-badge">Featured</div>
+          </div>
+          <div class="featured-content">
+            <div class="post-meta">
+              <span class="post-category">Digital Presence</span>
+              <div class="post-dot"></div>
+              <span class="post-date">15 Mar 2025</span>
+            </div>
+            <h2>Mengapa Bisnis Anda Butuh Lebih dari Sekadar Instagram</h2>
+            <p>Banyak bisnis mengandalkan Instagram sebagai satu-satunya kanal digital. Tapi apakah itu cukup? Artikel ini membahas mengapa digital presence yang terintegrasi jauh lebih efektif untuk pertumbuhan bisnis jangka panjang.</p>
+            <a href="#" class="post-read-link">
+              Baca Selengkapnya
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </a>
+            <div class="post-read-time">⏱ 5 menit baca</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOG + SIDEBAR LAYOUT -->
+      <div class="blog-layout">
+
+        <!-- POSTS -->
+        <div class="blog-content">
+          <div class="blog-section-label">Artikel Terbaru</div>
+          <div class="blog-grid" id="blogGrid">
+
+            <div class="blog-card" data-category="branding" data-animate="fadeUp" style="animation-delay:0.1s">
+              <div class="blog-card-visual">
+                <div class="blog-card-visual-inner color-2">
+                  <div class="card-cat-badge">Branding</div>
+                  <div class="blog-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="3" stroke="#fff" stroke-width="1.5"/>
+                      <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-card-body">
+                <div class="post-meta">
+                  <span class="post-category">Branding</span>
+                  <div class="post-dot"></div>
+                  <span class="post-date">10 Mar 2025</span>
+                </div>
+                <h3>5 Elemen Brand Identity yang Wajib Dimiliki Bisnis UMKM</h3>
+                <p>Logo saja tidak cukup. Ini adalah 5 elemen brand identity yang harus konsisten di semua platform digital bisnis Anda.</p>
+              </div>
+              <div class="blog-card-footer">
+                <span class="read-time">⏱ 4 menit baca</span>
+                <a href="#" class="post-read-link" style="font-size:0.78rem">Baca →</a>
+              </div>
+            </div>
+
+            <div class="blog-card" data-category="website" data-animate="fadeUp" style="animation-delay:0.2s">
+              <div class="blog-card-visual">
+                <div class="blog-card-visual-inner color-3">
+                  <div class="card-cat-badge">Website</div>
+                  <div class="blog-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <rect x="2" y="3" width="20" height="14" rx="2" stroke="#fff" stroke-width="1.5"/>
+                      <path d="M8 21h8M12 17v4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-card-body">
+                <div class="post-meta">
+                  <span class="post-category">Website</span>
+                  <div class="post-dot"></div>
+                  <span class="post-date">5 Mar 2025</span>
+                </div>
+                <h3>Website Bukan Sekadar Brosur Online — Ini Fungsi Strategisnya</h3>
+                <p>Website yang baik bekerja 24 jam untuk bisnis Anda. Pelajari bagaimana website bisa menjadi aset bisnis yang sesungguhnya.</p>
+              </div>
+              <div class="blog-card-footer">
+                <span class="read-time">⏱ 6 menit baca</span>
+                <a href="#" class="post-read-link" style="font-size:0.78rem">Baca →</a>
+              </div>
+            </div>
+
+            <div class="blog-card" data-category="studi-kasus" data-animate="fadeUp" style="animation-delay:0.3s">
+              <div class="blog-card-visual">
+                <div class="blog-card-visual-inner color-4">
+                  <div class="card-cat-badge">Studi Kasus</div>
+                  <div class="blog-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M9 11l3 3L22 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-card-body">
+                <div class="post-meta">
+                  <span class="post-category">Studi Kasus</span>
+                  <div class="post-dot"></div>
+                  <span class="post-date">28 Feb 2025</span>
+                </div>
+                <h3>Studi Kasus: Bagaimana MiFood Membangun Digital Presence yang Konsisten</h3>
+                <p>Dari tidak punya website hingga memiliki identitas digital yang kuat. Ini perjalanan MiFood bersama Aenra.</p>
+              </div>
+              <div class="blog-card-footer">
+                <span class="read-time">⏱ 7 menit baca</span>
+                <a href="#" class="post-read-link" style="font-size:0.78rem">Baca →</a>
+              </div>
+            </div>
+
+            <div class="blog-card" data-category="tips" data-animate="fadeUp" style="animation-delay:0.1s">
+              <div class="blog-card-visual">
+                <div class="blog-card-visual-inner color-5">
+                  <div class="card-cat-badge">Tips</div>
+                  <div class="blog-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-card-body">
+                <div class="post-meta">
+                  <span class="post-category">Tips & Trik</span>
+                  <div class="post-dot"></div>
+                  <span class="post-date">20 Feb 2025</span>
+                </div>
+                <h3>3 Hal yang Harus Dicek Sebelum Meluncurkan Website Bisnis</h3>
+                <p>Jangan langsung publish sebelum memastikan 3 hal penting ini. Checklist singkat untuk website yang siap tampil profesional.</p>
+              </div>
+              <div class="blog-card-footer">
+                <span class="read-time">⏱ 3 menit baca</span>
+                <a href="#" class="post-read-link" style="font-size:0.78rem">Baca →</a>
+              </div>
+            </div>
+
+            <div class="blog-card" data-category="digital-presence" data-animate="fadeUp" style="animation-delay:0.2s">
+              <div class="blog-card-visual">
+                <div class="blog-card-visual-inner color-6">
+                  <div class="card-cat-badge">Digital Presence</div>
+                  <div class="blog-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="1.5"/>
+                      <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="#fff" stroke-width="1.5"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-card-body">
+                <div class="post-meta">
+                  <span class="post-category">Digital Presence</span>
+                  <div class="post-dot"></div>
+                  <span class="post-date">15 Feb 2025</span>
+                </div>
+                <h3>Kenapa Bisnis Lokal Perlu Muncul di Google Search</h3>
+                <p>Pelanggan mencari produk di Google sebelum membeli. Apakah bisnis Anda sudah mudah ditemukan? Ini cara memulainya.</p>
+              </div>
+              <div class="blog-card-footer">
+                <span class="read-time">⏱ 5 menit baca</span>
+                <a href="#" class="post-read-link" style="font-size:0.78rem">Baca →</a>
+              </div>
+            </div>
+
+            <div class="blog-card" data-category="branding" data-animate="fadeUp" style="animation-delay:0.3s">
+              <div class="blog-card-visual">
+                <div class="blog-card-visual-inner color-1">
+                  <div class="card-cat-badge">Branding</div>
+                  <div class="blog-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="blog-card-body">
+                <div class="post-meta">
+                  <span class="post-category">Branding</span>
+                  <div class="post-dot"></div>
+                  <span class="post-date">8 Feb 2025</span>
+                </div>
+                <h3>Warna Brand Anda Bicara Apa? Psikologi Warna dalam Branding</h3>
+                <p>Setiap warna membawa pesan yang berbeda. Pelajari bagaimana memilih warna brand yang tepat untuk bisnis Anda.</p>
+              </div>
+              <div class="blog-card-footer">
+                <span class="read-time">⏱ 4 menit baca</span>
+                <a href="#" class="post-read-link" style="font-size:0.78rem">Baca →</a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- LOAD MORE -->
+          <div class="blog-load-more">
+            <button class="load-more-btn" id="loadMoreBtn">Lihat Artikel Lainnya</button>
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="blog-sidebar">
+          <div class="sidebar-card">
+            <h4>Topik Populer</h4>
+            <a class="sidebar-topic" href="#">
+              <div class="sidebar-topic-dot"></div>
+              <span>Digital Presence</span>
+            </a>
+            <a class="sidebar-topic" href="#">
+              <div class="sidebar-topic-dot"></div>
+              <span>Branding & Identity</span>
+            </a>
+            <a class="sidebar-topic" href="#">
+              <div class="sidebar-topic-dot"></div>
+              <span>Website Strategis</span>
+            </a>
+            <a class="sidebar-topic" href="#">
+              <div class="sidebar-topic-dot"></div>
+              <span>SEO & Google</span>
+            </a>
+            <a class="sidebar-topic" href="#">
+              <div class="sidebar-topic-dot"></div>
+              <span>Studi Kasus</span>
+            </a>
+            <a class="sidebar-topic" href="#">
+              <div class="sidebar-topic-dot"></div>
+              <span>Tips & Trik</span>
+            </a>
+          </div>
+
+          <div class="sidebar-cta">
+            <h4>Siap Membangun Digital Presence?</h4>
+            <p>Konsultasi gratis dengan tim Aenra dan mulai perjalanan digital bisnis Anda.</p>
+            <a href="index.html#contact" class="sidebar-cta-btn">Hubungi Kami</a>
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- NEWSLETTER -->
+      <div class="blog-newsletter" data-animate="fadeUp">
+        <div class="blog-newsletter-inner">
+          <h3>Dapatkan <span>Insight Terbaru</span></h3>
+          <p>Subscribe dan dapatkan artikel tips digital presence, branding, dan tren bisnis langsung di inbox Anda.</p>
+          <div class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="email@bisnis.com" id="newsletterEmail"/>
+            <button class="newsletter-btn" id="newsletterBtn">Subscribe</button>
+          </div>
+          <div id="newsletterFeedback" style="margin-top:0.8rem;font-size:0.82rem;color:var(--cyan);min-height:20px;"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="logo">
+          <img src="img/AENRA LOGO.png" style="width:110px;height:40px;object-fit:contain;">
+        </div>
+        <p>Solusi digital terpercaya untuk bisnis modern Anda.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="about.html">About Us</a>
+          <a href="#">Our Team</a>
+          <a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Aenra. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Scroll animations
+    const animEls = document.querySelectorAll('[data-animate]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    animEls.forEach(el => observer.observe(el));
+
+    // Filter buttons
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const blogCards = document.querySelectorAll('.blog-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        blogCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Newsletter
+    document.getElementById('newsletterBtn').addEventListener('click', () => {
+      const email = document.getElementById('newsletterEmail').value.trim();
+      const feedback = document.getElementById('newsletterFeedback');
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        feedback.style.color = '#e74c3c';
+        feedback.textContent = 'Masukkan email yang valid.';
+        return;
+      }
+      feedback.style.color = 'var(--cyan)';
+      feedback.textContent = '✓ Terima kasih! Anda telah berhasil subscribe.';
+      document.getElementById('newsletterEmail').value = '';
+    });
+
+    // Load more (simulasi)
+    document.getElementById('loadMoreBtn').addEventListener('click', function() {
+      this.textContent = 'Memuat...';
+      setTimeout(() => {
+        this.textContent = 'Semua artikel telah ditampilkan';
+        this.disabled = true;
+        this.style.opacity = '0.5';
+        this.style.cursor = 'default';
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
