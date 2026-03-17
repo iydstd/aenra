@@ -992,6 +992,38 @@ body {
   transform: translate(0);
 }
 
+.service-card {
+  display: flex;
+  flex-direction: column; /* agar tombol bisa push ke bawah */
+}
+
+.service-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto; /* dorong tombol ke bawah card */
+  padding-top: 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--cyan);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: gap 0.3s ease, color 0.3s ease;
+}
+
+.service-btn::after {
+  content: '→';
+  transition: transform 0.3s ease;
+}
+
+.service-btn:hover {
+  color: #00b3c0;
+}
+
+.service-btn:hover::after {
+  transform: translateX(4px);
+}
+
 /* ====== RESPONSIVE ====== */
 @media (max-width: 900px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1132,12 +1164,14 @@ body {
   .footer-links         { grid-template-columns: 1fr; gap: 1.2rem; }
   .footer-bottom p      { font-size: 0.75rem; }
 }
+
 @media (max-width: 768px) {
   .footer-links {
     justify-content: flex-start; /* mepet kiri di mobile */
     gap: 2.5rem;
   }
 }
+
 @media (max-width: 768px) {
   .footer-container {
     grid-template-columns: 1fr;
@@ -1147,7 +1181,7 @@ body {
 
   .footer-links {
     grid-template-columns: repeat(3, 1fr); /* tetap 3 kolom tapi lebih kecil */
-    gap: 1rem;
+    gap: 4rem;
   }
 
   .footer-col h4 { font-size: 0.72rem; }
