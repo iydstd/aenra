@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// Project item — toggle active on tap (mobile)
+// Project item   toggle active on tap (mobile)
 document.querySelectorAll('.project-item:not(.project-empty)').forEach(item => {
   item.addEventListener('click', () => {
     const isActive = item.classList.contains('active');
