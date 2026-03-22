@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Website Bukan Sekadar Brosur Online Aenra Blog</title>
+  <meta name="description" content="Website yang baik bekerja 24 jam untuk bisnis Anda. Pelajari bagaimana website bisa menjadi aset bisnis yang sesungguhnya, bukan sekadar brosur digital."/>
+  <meta name="author" content="Aenra Studio"/>
+  <meta property="og:title" content="Website Bukan Sekadar Brosur Online Ini Fungsi Strategisnya"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:site_name" content="Aenra Studio"/>
+  <link rel="icon" type="image/png" href="img/AENRA LOGO1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .article-hero {
+      background: #013b46;
+      padding-top: 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .article-hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,200,215,0.1) 0%, transparent 65%);
+      top: -120px; right: -120px;
+      pointer-events: none;
+    }
+    .article-hero::after {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(0,200,215,0.06) 0%, transparent 65%);
+      bottom: -60px; left: -60px;
+      pointer-events: none;
+    }
+    .article-hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.75rem; margin-bottom: 1.8rem; flex-wrap: wrap;
+    }
+    .breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s ease; }
+    .breadcrumb a:hover { color: var(--cyan); }
+    .breadcrumb-sep { color: rgba(255,255,255,0.15); }
+    .breadcrumb-current { color: rgba(255,255,255,0.6); }
+    .article-meta-top {
+      display: flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 1.2rem; flex-wrap: wrap;
+    }
+    .article-category {
+      background: rgba(0,200,215,0.12); color: var(--cyan);
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 0.3rem 0.9rem;
+      border-radius: 50px; border: 1px solid rgba(0,200,215,0.2);
+    }
+    .article-date, .article-read-time { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+    .meta-dot { width: 3px; height: 3px; background: rgba(255,255,255,0.2); border-radius: 50%; }
+    .article-title {
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 800; color: var(--white);
+      line-height: 1.12; letter-spacing: 0px;
+      margin-bottom: 1.2rem; max-width: 800px;
+    }
+    .article-lead {
+      font-size: 1.05rem; color: rgba(255,255,255,0.55);
+      line-height: 1.8; margin-bottom: 2.5rem; max-width: 640px;
+    }
+    .article-author {
+      display: flex; align-items: center; gap: 12px;
+      padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+    }
+    .author-avatar {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, #025566, var(--cyan));
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; font-weight: 800; color: var(--white); flex-shrink: 0;
+    }
+    .author-name { font-size: 0.88rem; font-weight: 700; color: var(--white); }
+    .author-role { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
+    .article-share { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+    .share-label { font-size: 0.7rem; color: rgba(255,255,255,0.25); letter-spacing: 1.5px; text-transform: uppercase; }
+    .share-btn {
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; text-decoration: none; color: rgba(255,255,255,0.4);
+      transition: all 0.2s ease;
+    }
+    .share-btn:hover { background: rgba(0,200,215,0.12); border-color: var(--cyan); color: var(--cyan); }
+
+    .article-body { background: var(--white); }
+    .article-layout {
+      max-width: 1100px; margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+      display: grid; grid-template-columns: 1fr 268px;
+      gap: 4rem; align-items: start;
+    }
+    .article-content { min-width: 0; }
+    .article-cover {
+      width: 100%; height: 300px;
+      background: linear-gradient(135deg, #164863 0%, #013b46 50%, #00C8D7 100%);
+      border-radius: 20px; margin-bottom: 2.5rem;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .article-cover::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .article-cover-icon {
+      width: 80px; height: 80px;
+      background: rgba(255,255,255,0.1); border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15);
+      position: relative; z-index: 1;
+    }
+    .article-content h2 {
+      font-size: 1.35rem; font-weight: 800; color: var(--dark);
+      letter-spacing: -0.5px; line-height: 1.3; margin: 2.5rem 0 0.9rem;
+    }
+    .article-content h3 {
+      font-size: 1.05rem; font-weight: 700; color: var(--dark);
+      letter-spacing: -0.3px; margin: 2rem 0 0.7rem;
+    }
+    .article-content p {
+      font-size: 0.98rem; color: #3d5166;
+      line-height: 1.85; margin-bottom: 1.3rem;
+    }
+    .article-content ul, .article-content ol {
+      padding-left: 0; margin-bottom: 1.4rem;
+      list-style: none; display: flex; flex-direction: column; gap: 0.55rem;
+    }
+    .article-content ul li {
+      display: flex; align-items: flex-start;
+      gap: 10px; font-size: 0.98rem; color: #3d5166; line-height: 1.7;
+    }
+    .article-content ul li::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--cyan); border-radius: 50%;
+      flex-shrink: 0; margin-top: 8px;
+    }
+    .article-content ol { counter-reset: ol-counter; }
+    .article-content ol li {
+      display: flex; align-items: flex-start;
+      gap: 12px; font-size: 0.98rem; color: #3d5166; line-height: 1.7;
+      counter-increment: ol-counter;
+    }
+    .article-content ol li::before {
+      content: counter(ol-counter);
+      background: var(--cyan); color: var(--dark);
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800; flex-shrink: 0; margin-top: 2px;
+    }
+    .article-content ol li > div { flex: 1; min-width: 0; }
+    .article-content ol li strong { color: var(--dark); font-weight: 700; }
+    .article-content ol li span { color: var(--text-muted); font-weight: 400; }
+    .article-content blockquote {
+      border-left: 3px solid var(--cyan);
+      background: rgba(0,200,215,0.04);
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.5rem; margin: 2rem 0;
+    }
+    .article-content blockquote p {
+      font-size: 1.05rem; font-weight: 600; color: var(--dark);
+      font-style: italic; margin: 0; line-height: 1.65;
+    }
+    .highlight-box {
+      background: rgba(0,200,215,0.04);
+      border: 1px solid rgba(0,200,215,0.18);
+      border-radius: 14px; padding: 1.4rem 1.5rem; margin: 2rem 0;
+    }
+    .highlight-box-title {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 0.6rem;
+    }
+    .highlight-box p { font-size: 0.92rem; color: var(--text-muted); margin: 0; line-height: 1.7; }
+
+    /* Comparison table */
+    .compare-table {
+      width: 100%; border-collapse: collapse;
+      margin: 1.5rem 0; font-size: 0.88rem;
+    }
+    .compare-table th {
+      background: #013b46; color: var(--white);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; padding: 0.8rem 1rem;
+      text-align: left;
+    }
+    .compare-table th:first-child { border-radius: 10px 0 0 0; }
+    .compare-table th:last-child { border-radius: 0 10px 0 0; }
+    .compare-table td {
+      padding: 0.8rem 1rem; color: #3d5166;
+      border-bottom: 1px solid var(--light-bg); line-height: 1.6;
+      vertical-align: top;
+    }
+    .compare-table tr:last-child td:first-child { border-radius: 0 0 0 10px; }
+    .compare-table tr:last-child td:last-child { border-radius: 0 0 10px 0; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table td:first-child { font-weight: 700; color: var(--dark); }
+    .compare-table tr:nth-child(even) td { background: rgba(0,200,215,0.02); }
+
+    /* Fungsi badge */
+    .fungsi-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,200,215,0.08);
+      border: 1px solid rgba(0,200,215,0.2);
+      border-radius: 50px; padding: 0.3rem 1rem 0.3rem 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+    .fungsi-badge-num {
+      width: 24px; height: 24px;
+      background: var(--cyan); color: var(--dark);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 800; flex-shrink: 0;
+    }
+    .fungsi-badge-text {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--cyan);
+    }
+
+    /* Checklist stages */
+    .checklist-stage {
+      background: var(--light-bg); border-radius: 14px;
+      padding: 1.4rem 1.5rem; margin-bottom: 1rem;
+    }
+    .checklist-stage-title {
+      font-size: 0.88rem; font-weight: 700; color: var(--dark);
+      margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px;
+    }
+    .checklist-stage-num {
+      width: 22px; height: 22px;
+      background: var(--dark); color: var(--white);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.68rem; font-weight: 800; flex-shrink: 0;
+    }
+    .checklist-stage ul { margin: 0; gap: 0.4rem; }
+    .checklist-stage ul li { font-size: 0.88rem; }
+    .checklist-stage ul li::before { margin-top: 6px; }
+
+    .article-content strong { color: var(--dark); font-weight: 700; }
+    .article-divider { border: none; border-top: 1px solid var(--light-bg); margin: 2.5rem 0; }
+    .article-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 2.5rem; padding-top: 2rem;
+      border-top: 1px solid var(--light-bg);
+    }
+    .article-tag {
+      background: var(--light-bg); color: var(--text-muted);
+      font-size: 0.75rem; font-weight: 600; padding: 0.3rem 0.9rem;
+      border-radius: 50px; text-decoration: none; transition: all 0.2s ease;
+    }
+    .article-tag:hover { background: rgba(0,200,215,0.1); color: var(--cyan); }
+    .article-cta {
+      background: #013b46; border-radius: 20px; padding: 2rem;
+      text-align: center; margin: 3rem 0; position: relative; overflow: hidden;
+    }
+    .article-cta::before {
+      content: ''; position: absolute;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(0,200,215,0.1) 0%, transparent 65%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
+    }
+    .article-cta-inner { position: relative; z-index: 1; }
+    .article-cta h4 { font-size: 1.15rem; font-weight: 800; color: var(--white); margin-bottom: 0.5rem; }
+    .article-cta h4 span { color: var(--cyan); }
+    .article-cta p { font-size: 0.88rem; color: rgba(255,255,255,0.5); margin-bottom: 1.4rem; line-height: 1.65; }
+    .article-cta-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--cyan); color: var(--dark);
+      text-decoration: none; font-size: 0.88rem; font-weight: 700;
+      padding: 0.7rem 1.6rem; border-radius: 10px;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .article-cta-btn:hover { background: #00e5f5; transform: translateY(-2px); }
+
+    .article-sidebar { position: sticky; top: 88px; }
+    .toc-card, .related-card {
+      background: var(--light-bg); border-radius: 16px;
+      padding: 1.4rem; margin-bottom: 1.2rem;
+    }
+    .toc-title, .related-title {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--dark); margin-bottom: 1rem;
+      padding-bottom: 0.7rem; border-bottom: 2px solid rgba(0,200,215,0.15);
+    }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+    .toc-list li a {
+      font-size: 0.82rem; color: var(--text-muted); text-decoration: none;
+      display: block; padding: 0.3rem 0 0.3rem 10px;
+      border-left: 2px solid transparent; transition: all 0.2s ease; line-height: 1.4;
+    }
+    .toc-list li a:hover, .toc-list li a.active { color: var(--cyan); border-left-color: var(--cyan); }
+    .related-post {
+      display: flex; gap: 10px; padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      text-decoration: none; transition: opacity 0.2s ease; align-items: flex-start;
+    }
+    .related-post:last-child { border-bottom: none; padding-bottom: 0; }
+    .related-post:hover { opacity: 0.7; }
+    .related-post-dot {
+      width: 34px; height: 34px; border-radius: 8px;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    }
+    .related-post-info h5 { font-size: 0.8rem; font-weight: 600; color: var(--dark); line-height: 1.35; margin-bottom: 0.2rem; }
+    .related-post-info span { font-size: 0.7rem; color: var(--text-muted); }
+    .sidebar-article-cta { background: #013b46; border-radius: 16px; padding: 1.5rem; text-align: center; }
+    .sidebar-article-cta h4 { font-size: 0.92rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .sidebar-article-cta p { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.6; margin-bottom: 1rem; }
+    .sidebar-article-cta a {
+      display: block; background: var(--cyan); color: var(--dark);
+      text-decoration: none; font-size: 0.82rem; font-weight: 700;
+      padding: 0.65rem 1rem; border-radius: 8px; transition: background 0.2s ease;
+    }
+    .sidebar-article-cta a:hover { background: #00e5f5; }
+
+    .more-articles { background: var(--light-bg); padding: 4rem 2rem; }
+    .more-articles-inner { max-width: 1100px; margin: 0 auto; }
+    .more-articles-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .more-articles-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--cyan); }
+    .more-articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .more-article-card {
+      background: var(--white); border-radius: 16px; padding: 1.5rem;
+      text-decoration: none; display: block; border: 1px solid transparent;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .more-article-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,200,215,0.1); border-color: rgba(0,200,215,0.15); }
+    .more-card-cat { font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cyan); margin-bottom: 0.6rem; }
+    .more-article-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--dark); line-height: 1.4; margin-bottom: 0.5rem; }
+    .more-article-card span { font-size: 0.75rem; color: var(--text-muted); }
+
+    @media (max-width: 900px) {
+      .article-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .article-sidebar { position: static; }
+      .more-articles-grid { grid-template-columns: repeat(2, 1fr); }
+      .compare-table { font-size: 0.82rem; }
+    }
+    @media (max-width: 768px) {
+      .article-hero-inner { padding: 3rem 1.5rem 4rem; }
+      .article-layout { padding: 3rem 1.5rem 4rem; }
+      .article-title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+      .article-share { margin-left: 0; width: 100%; }
+      .more-articles { padding: 3rem 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .article-hero-inner { padding: 2.5rem 1.2rem 3.5rem; }
+      .article-layout { padding: 2.5rem 1.2rem 4rem; }
+      .article-cover { height: 200px; border-radius: 14px; }
+      .more-articles { padding: 2.5rem 1.2rem; }
+      .more-articles-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="img/AENRA LOGO.png" style="width:110px;height:40px;object-fit:contain;">
+        </a>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html#service" class="nav-link">Service</a>
+        <a href="index.html#project" class="nav-link">Project</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html#service" class="mobile-link">Service</a>
+      <a href="index.html#project" class="mobile-link">Project</a>
+      <a href="blog.html" class="mobile-link">Blog</a>
+      <a href="index.html#contact" class="mobile-link">Contact</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="article-hero">
+    <div class="article-hero-inner">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="blog.html">Blog</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">Website Strategis</span>
+      </nav>
+      <div class="article-meta-top">
+        <span class="article-category">Website</span>
+        <div class="meta-dot"></div>
+        <span class="article-date">5 Maret 2025</span>
+        <div class="meta-dot"></div>
+        <span class="article-read-time">⏱ 7 menit baca</span>
+      </div>
+      <h1 class="article-title">Website Bukan Sekadar Brosur Online Ini Fungsi Strategisnya</h1>
+      <p class="article-lead">Website yang baik bekerja 24 jam untuk bisnis Anda. Pelajari bagaimana website bisa menjadi aset bisnis yang sesungguhnya, bukan hanya file digital yang pasif.</p>
+      <div class="article-author">
+
+        <div class="author-info">
+          <div class="author-name">Tim Aenra</div>
+          <div class="author-role">Aenra Studio</div>
+        </div>
+        <div class="article-share">
+          <span class="share-label">Share</span>
+          <a class="share-btn" href="https://wa.me/?text=Baca artikel ini: " target="_blank" title="WhatsApp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <button class="share-btn" id="copyLink" title="Copy link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BODY -->
+  <div class="article-body">
+    <div class="article-layout">
+      <article class="article-content">
+
+        <div class="article-cover">
+          <div class="article-cover-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="3" width="20" height="14" rx="2" stroke="#00C8D7" stroke-width="1.5"/>
+              <path d="M8 21h8M12 17v4" stroke="#00C8D7" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <p>Masih banyak pemilik bisnis yang berpikir bahwa website hanyalah "brosur online" cukup berisi profil perusahaan, foto produk, dan nomor telepon. Selesai.</p>
+
+        <p>Pemikiran ini tidak sepenuhnya salah, tapi sayangnya <strong>sangat membatasi potensi</strong> yang sebenarnya bisa didapatkan dari sebuah website.</p>
+
+        <blockquote>
+          <p>Iklan di media sosial ibarat menyewa lapak di pasar. Begitu Anda berhenti bayar, lapak itu hilang. Website, jika dibangun dengan benar, adalah tanah dan bangunan Anda sendiri.</p>
+        </blockquote>
+
+        <h2 id="mindset-lama">Mindset Lama: Website sebagai Brosur Digital</h2>
+        <p>Mari kita lihat perbedaan dampaknya secara langsung:</p>
+
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Ciri Website Brosur</th>
+              <th>Dampak untuk Bisnis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hanya berisi profil dan produk</td>
+              <td>Pengunjung datang, melihat, lalu pergi tidak ada interaksi lanjutan</td>
+            </tr>
+            <tr>
+              <td>Desain statis, jarang diperbarui</td>
+              <td>Kesan tidak aktif, bisnis terlihat mungkin sudah tutup</td>
+            </tr>
+            <tr>
+              <td>Tidak mengumpulkan data pengunjung</td>
+              <td>Kehilangan kesempatan membangun hubungan jangka panjang</td>
+            </tr>
+            <tr>
+              <td>Tidak terintegrasi sistem lain</td>
+              <td>Proses manual di belakang layar tetap banyak dan tidak efisien</td>
+            </tr>
+            <tr>
+              <td>Dibuat sekali, dilupakan</td>
+              <td>Investasi sia-sia karena tidak memberikan nilai berkelanjutan</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="highlight-box">
+          <div class="highlight-box-title">💡 Ironi yang Sering Terjadi</div>
+          <p>Banyak bisnis rela mengeluarkan jutaan rupiah untuk iklan media sosial setiap bulan, tapi menganggap website sebagai "biaya" yang cukup dikeluarkan sekali seumur hidup.</p>
+        </div>
+
+        <hr class="article-divider"/>
+
+        <h2 id="mindset-baru">Mindset Baru: Website sebagai Aset Strategis</h2>
+        <p>Apa artinya "aset strategis"? Sederhananya: sesuatu yang <strong>bekerja untuk Anda</strong>, bertambah nilainya seiring waktu, dan memberikan keuntungan berulang tanpa harus terus-menerus dikeluari biaya besar.</p>
+        <p>Berikut 5 fungsi strategis yang bisa dijalankan website jika dirancang dengan benar:</p>
+
+        <!-- Fungsi 1 -->
+        <div class="fungsi-badge">
+          <div class="fungsi-badge-num">1</div>
+          <span class="fungsi-badge-text">Fungsi Strategis</span>
+        </div>
+        <h2 id="pusat-informasi">Pusat Data dan Informasi Terpercaya</h2>
+        <p>Di era di mana informasi tersebar di mana-mana, website berperan sebagai <strong>sumber kebenaran tunggal</strong> bagi bisnis Anda.</p>
+        <p>Bayangkan skenario ini: calon pelanggan melihat produk di Instagram, penasaran ingin tahu detail, tapi harus scroll ratusan postingan atau menunggu balasan DM. Bandingkan dengan: mereka klik link di bio, langsung masuk halaman produk dengan informasi lengkap spesifikasi, harga, testimoni, FAQ semua terjawab dalam 3 menit.</p>
+
+        <div class="highlight-box">
+          <div class="highlight-box-title">📊 Data Mendukung</div>
+          <p><strong>75% konsumen</strong> mengaku menilai kredibilitas bisnis berdasarkan kualitas website mereka. Website yang informatif membangun kepercayaan lebih cepat daripada akun media sosial dengan followers banyak tapi informasi tidak jelas.</p>
+        </div>
+
+        <!-- Fungsi 2 -->
+        <div class="fungsi-badge">
+          <div class="fungsi-badge-num">2</div>
+          <span class="fungsi-badge-text">Fungsi Strategis</span>
+        </div>
+        <h2 id="mesin-pencari">Mesin Pencari Pelanggan (24/7)</h2>
+        <p>Inilah perbedaan paling mendasar: <strong>media sosial menunggu orang mencari hiburan, website memungkinkan orang mencari solusi</strong>.</p>
+        <p>Di Google, orang mengetik apa yang mereka butuhkan. Jika website Anda dioptimasi dengan baik, maka 24 jam sehari website Anda bekerja menjemput pelanggan yang sedang mencari kebutuhan yang Anda tawarkan tanpa perlu bayar per klik, tanpa khawatir algoritma berubah.</p>
+        <ul>
+          <li>Artikel blog yang ditulis hari ini bisa mendatangkan pengunjung 2 tahun lagi</li>
+          <li>Foto produk bisa ditemukan calon pelanggan melalui pencarian gambar kapan saja</li>
+          <li>Halaman layanan bisa muncul di pencarian lokal untuk kata kunci spesifik</li>
+        </ul>
+
+        <!-- Fungsi 3 -->
+        <div class="fungsi-badge">
+          <div class="fungsi-badge-num">3</div>
+          <span class="fungsi-badge-text">Fungsi Strategis</span>
+        </div>
+        <h2 id="data-pelanggan">Pengumpul Data Pelanggan (First-Party Data)</h2>
+        <p>Di media sosial, Anda hanya "menyewa" audiens. Anda tahu mereka melihat konten Anda, tapi Anda tidak tahu siapa mereka. Ketika platform berganti aturan, koneksi dengan audiens itu bisa putus dalam semalam.</p>
+        <p>Dengan website, Anda bisa membangun <strong>first-party data</strong> data yang Anda miliki sendiri:</p>
+        <ul>
+          <li><strong>Email subscriber</strong> melalui form newsletter</li>
+          <li><strong>Nomor WhatsApp</strong> melalui integrasi chat yang terstruktur</li>
+          <li><strong>Perilaku pengunjung</strong> halaman apa yang dilihat, berapa lama, dari mana asalnya</li>
+          <li><strong>Riwayat pembelian</strong> jika terintegrasi dengan sistem transaksi</li>
+        </ul>
+
+        <blockquote>
+          <p>Followers di media sosial adalah milik platform. Subscriber email dan kontak WhatsApp adalah milik Anda.</p>
+        </blockquote>
+
+        <!-- Fungsi 4 -->
+        <div class="fungsi-badge">
+          <div class="fungsi-badge-num">4</div>
+          <span class="fungsi-badge-text">Fungsi Strategis</span>
+        </div>
+        <h2 id="panggung-brand">Panggung Brand yang Tidak Terbatas</h2>
+        <p>Media sosial membatasi Anda: Instagram maksimal 2.200 karakter, TikTok hanya video pendek, algoritma membatasi jangkauan organik. Di website, <strong>tidak ada batasan</strong>.</p>
+        <ul>
+          <li>Tulis cerita panjang tentang filosofi dan perjalanan brand</li>
+          <li>Tampilkan portofolio klien dalam format lengkap dan terstruktur</li>
+          <li>Buat halaman edukasi yang menjelaskan produk secara mendalam</li>
+          <li>Tayangkan video demo tanpa batas durasi</li>
+        </ul>
+        <p>Brand yang hanya punya media sosial terkesan seperti <strong>kenalan biasa</strong>. Brand yang punya website lengkap terkesan seperti <strong>profesional yang bisa diajak bicara serius</strong>.</p>
+
+        <!-- Fungsi 5 -->
+        <div class="fungsi-badge">
+          <div class="fungsi-badge-num">5</div>
+          <span class="fungsi-badge-text">Fungsi Strategis</span>
+        </div>
+        <h2 id="mesin-transaksi">Mesin Transaksi Otomatis</h2>
+        <p>Dengan integrasi sistem yang tepat, website bisa menjadi <strong>mesin penjualan yang bekerja otomatis</strong>:</p>
+        <ul>
+          <li>Menerima pesanan 24 jam tanpa perlu customer service standby</li>
+          <li>Memproses pembayaran otomatis melalui payment gateway</li>
+          <li>Mengirim konfirmasi dan invoice otomatis ke email pelanggan</li>
+          <li>Mencatat data pesanan untuk analisis bisnis secara real-time</li>
+        </ul>
+        <p>Bayangkan Anda sedang liburan, tapi di saat yang sama ada pesanan masuk melalui website uang masuk ke rekening, data tercatat, dan Anda tinggal memproses saat kembali. <strong>Itulah kekuatan website sebagai aset.</strong></p>
+
+        <hr class="article-divider"/>
+
+        <h2 id="langkah-transformasi">Langkah Transformasi Website Anda</h2>
+        <p>Tidak perlu langsung sempurna. Lakukan secara bertahap:</p>
+
+        <div class="checklist-stage">
+          <div class="checklist-stage-title">
+            <div class="checklist-stage-num">1</div>
+            Tahap Pertama Dasar yang Kuat
+          </div>
+          <ul>
+            <li>Informasi dasar lengkap: profil, produk/layanan, kontak</li>
+            <li>Desain responsif dan nyaman diakses dari ponsel</li>
+            <li>Kecepatan loading baik, tidak lebih dari 3 detik</li>
+          </ul>
+        </div>
+
+        <div class="checklist-stage">
+          <div class="checklist-stage-title">
+            <div class="checklist-stage-num">2</div>
+            Tahap Kedua Mulai Mengumpulkan Data
+          </div>
+          <ul>
+            <li>Form newsletter di halaman strategis</li>
+            <li>Google Analytics untuk memahami perilaku pengunjung</li>
+            <li>Tombol WhatsApp yang terstruktur, bukan sekadar link</li>
+          </ul>
+        </div>
+
+        <div class="checklist-stage">
+          <div class="checklist-stage-title">
+            <div class="checklist-stage-num">3</div>
+            Tahap Ketiga Optimasi untuk Ditemukan
+          </div>
+          <ul>
+            <li>Riset kata kunci yang relevan dengan bisnis Anda</li>
+            <li>Tulis artikel blog yang menjawab pertanyaan pelanggan</li>
+            <li>Optimasi judul dan deskripsi setiap halaman</li>
+          </ul>
+        </div>
+
+        <div class="checklist-stage">
+          <div class="checklist-stage-title">
+            <div class="checklist-stage-num">4</div>
+            Tahap Keempat Otomatisasi Proses
+          </div>
+          <ul>
+            <li>Integrasi dengan sistem pembayaran</li>
+            <li>Notifikasi otomatis untuk pesanan masuk</li>
+            <li>Hubungkan dengan CRM atau tools manajemen pelanggan</li>
+          </ul>
+        </div>
+
+        <div class="article-cta">
+          <div class="article-cta-inner">
+            <h4>Siap Jadikan Website Anda <span>Aset Strategis</span>?</h4>
+            <p>Tim Aenra membantu Anda merancang ekosistem digital terintegrasi dari website sebagai pusat, hingga sistem pendukung yang membuatnya bekerja optimal untuk bisnis Anda.</p>
+            <a href="index.html#contact" class="article-cta-btn">
+              Konsultasi Gratis
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <h2 id="kesimpulan">Kesimpulan</h2>
+        <p>Website bukanlah proyek sekali jadi yang bisa dilupakan setelah selesai. Ia adalah <strong>makhluk hidup</strong> yang perlu dirawat, dikembangkan, dan dioptimalkan agar terus memberikan nilai.</p>
+        <p>Mindset "website sebagai brosur" membuat Anda kehilangan potensi besar. Mindset "website sebagai aset strategis" membuka peluang untuk pertumbuhan jangka panjang yang lebih stabil dan berkelanjutan.</p>
+        <p>Ketika website benar-benar bekerja untuk bisnis Anda, ia menjadi <strong>salah satu karyawan terbaik yang pernah Anda miliki</strong> tidak pernah libur, tidak pernah mengeluh, dan terus bekerja mencari pelanggan baru setiap saat.</p>
+
+        <div class="article-tags">
+          <a href="blog.html" class="article-tag">#website</a>
+          <a href="blog.html" class="article-tag">#digital-presence</a>
+          <a href="blog.html" class="article-tag">#aset-bisnis</a>
+          <a href="blog.html" class="article-tag">#strategi-digital</a>
+          <a href="blog.html" class="article-tag">#SEO</a>
+        </div>
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="article-sidebar">
+        <div class="toc-card">
+          <div class="toc-title">Daftar Isi</div>
+          <ul class="toc-list">
+            <li><a href="#mindset-lama">Mindset Lama: Brosur Digital</a></li>
+            <li><a href="#mindset-baru">Mindset Baru: Aset Strategis</a></li>
+            <li><a href="#pusat-informasi">1. Pusat Informasi</a></li>
+            <li><a href="#mesin-pencari">2. Mesin Pencari Pelanggan</a></li>
+            <li><a href="#data-pelanggan">3. Pengumpul Data</a></li>
+            <li><a href="#panggung-brand">4. Panggung Brand</a></li>
+            <li><a href="#mesin-transaksi">5. Mesin Transaksi</a></li>
+            <li><a href="#langkah-transformasi">Langkah Transformasi</a></li>
+            <li><a href="#kesimpulan">Kesimpulan</a></li>
+          </ul>
+        </div>
+        <div class="related-card">
+          <div class="related-title">Artikel Terkait</div>
+          <a href="artikel-digital-presence.html" class="related-post">
+            <div class="related-post-dot" style="background:linear-gradient(135deg,#013b46,#00C8D7)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#fff" stroke-width="1.5"/></svg>
+            </div>
+            <div class="related-post-info">
+              <h5>Mengapa Bisnis Butuh Lebih dari Instagram</h5>
+              <span>Digital Presence · 5 menit</span>
+            </div>
+          </a>
+          <a href="artikel-branding.html" class="related-post">
+            <div class="related-post-dot" style="background:linear-gradient(135deg,#013b46,#025e4a)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#fff" stroke-width="1.5"/></svg>
+            </div>
+            <div class="related-post-info">
+              <h5>5 Elemen Brand Identity untuk Bisnis</h5>
+              <span>Branding · 6 menit</span>
+            </div>
+          </a>
+          <a href="#" class="related-post">
+            <div class="related-post-dot" style="background:linear-gradient(135deg,#1a1a2e,#013b46)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#fff" stroke-width="1.5"/></svg>
+            </div>
+            <div class="related-post-info">
+              <h5>3 Hal yang Harus Dicek Sebelum Launch Website</h5>
+              <span>Tips · 3 menit</span>
+            </div>
+          </a>
+        </div>
+        <div class="sidebar-article-cta">
+          <h4>Transformasi Website Anda</h4>
+          <p>Dari brosur digital menjadi aset bisnis yang bekerja 24 jam.</p>
+          <a href="index.html#contact">Mulai Sekarang →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- MORE ARTICLES -->
+  <section class="more-articles">
+    <div class="more-articles-inner">
+      <div class="more-articles-label">Baca Juga</div>
+      <div class="more-articles-grid">
+        <a href="artikel-digital-presence.html" class="more-article-card">
+          <div class="more-card-cat">Digital Presence</div>
+          <h4>Mengapa Bisnis Anda Butuh Lebih dari Sekadar Instagram</h4>
+          <span>15 Mar 2025 · 5 menit baca</span>
+        </a>
+        <a href="artikel-branding.html" class="more-article-card">
+          <div class="more-card-cat">Branding</div>
+          <h4>5 Elemen Brand Identity yang Wajib Dimiliki setiap Bisnis</h4>
+          <span>10 Mar 2025 · 6 menit baca</span>
+        </a>
+        <a href="#" class="more-article-card">
+          <div class="more-card-cat">Tips</div>
+          <h4>3 Hal yang Harus Dicek Sebelum Meluncurkan Website Bisnis</h4>
+          <span>20 Feb 2025 · 3 menit baca</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="logo">
+          <img src="img/AENRA LOGO.png" style="width:110px;height:40px;object-fit:contain;">
+        </div>
+        <p>Solusi digital terpercaya untuk bisnis modern Anda.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="about.html">About Us</a>
+          <a href="#">Our Team</a>
+          <a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Aenra. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('open');
+    }));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+    document.getElementById('copyLink').addEventListener('click', () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const btn = document.getElementById('copyLink');
+        btn.style.borderColor = 'var(--cyan)';
+        btn.style.color = 'var(--cyan)';
+        setTimeout(() => { btn.style.borderColor = ''; btn.style.color = ''; }, 1500);
+      });
+    });
+
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const headings = document.querySelectorAll('.article-content h2');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      headings.forEach(h => { if (window.scrollY >= h.offsetTop - 110) current = '#' + h.id; });
+      tocLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === current));
+    });
+  </script>
+</body>
+</html>
